@@ -2,6 +2,8 @@ package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.JobPositionService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAcces.abstracts.JobPositionDao;
 import kodlamaio.hrms.entities.concretes.JobPosition;
@@ -26,5 +28,24 @@ public class JobPositionManager implements JobPositionService {
 
     }
 
+    @Override
+    public Result add(JobPosition jobPosition) {
+        if(jobPosition.getName() == "")
+        {
+            return new ErrorResult("İş pozisyonu alanı boş bırakılamaz.");
+        }
 
+        else if(!checkJobPosition(jobPosition.getName())) {
+            return new ErrorResult("Bu iş pozisyonu zaten ekli.");
+        }
+        this.jobPositionDao.save(jobPosition);
+        return new SuccessDataResult("İş pozisyonu başarıyla eklendi.");
+    }
+
+    private boolean checkJobPosition(String name) {
+        if(this.jobPositionDao.getByName(name) == null) {
+            return true;
+        }
+        return false;
+    }
 }
