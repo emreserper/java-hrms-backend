@@ -38,16 +38,10 @@ public class CandidateManager implements CandidateService {
         final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(candidate.getEmail());
 
-        if(candidate.getFirstName() == "" || candidate.getLastName() == ""
-                || candidate.getEmail() == "" || candidate.getPassword() == ""
-                || candidate.getNationalityId() == "" || candidate.getBirthDate() == null)
+        if( candidate.getBirthDate() == null)
         {
-
-            return new ErrorResult("Tüm alanları doldurduğunuzdan emin olun.");
+            return new ErrorResult("Doğum tarihi boş olamaz.");
         }
-        else if (!this.mernisCheckService.checkIfRealPerson(candidate)){
-            return new ErrorResult("Girdiğiniz bilgiler mernis doğrulamasından geçemedi.");
-       }
 
         else if (!matcher.matches()){
             return new ErrorResult("Lütfen geçerli bir email adresi giriniz.");

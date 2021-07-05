@@ -17,7 +17,7 @@ public class MernisServiceAdapter implements MernisCheckService {
             result = bmvkpsPublicSoap.TCKimlikNoDogrula(
                     Long.parseLong(candidate.getNationalityId()),
                     candidate.getFirstName().toUpperCase(),
-                    candidate.getLastName().toUpperCase(), 1999 );  }
+                    candidate.getLastName().toUpperCase(), candidate.getBirthDate().getYear() );  }
         catch (Exception e) {
           return result;
         }

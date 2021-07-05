@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -19,11 +22,17 @@ public class User {
     private int id;
 
     @Column(name="email")
+    @NotBlank
+    @NotNull
     private String email;
 
     @Column(name="password")
+    @NotBlank
+    @NotNull
     private String password;
 
     @Transient
+    @NotBlank
+    @NotNull
     private String passwordVerification;
 }

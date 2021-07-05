@@ -7,15 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor // Boş constructor
 @AllArgsConstructor // Dolu constructor
-@Table(name="job_positions")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
-public class JobPosition {
-
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"}) // veriyi loop'a sokmamak için kökünde o tekrarlamayı engellemesi için gerekli kod satırı
+@Table(name="cities")
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -24,7 +22,6 @@ public class JobPosition {
     @Column(name="name")
     private String name;
 
-    @OneToMany(mappedBy = "jobPosition")
+    @OneToMany(mappedBy = "city")
     private List<JobAdvertisement> jobAdvertisements;
-
 }

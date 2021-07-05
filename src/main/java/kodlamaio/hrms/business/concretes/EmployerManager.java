@@ -36,14 +36,7 @@ public class EmployerManager implements EmployerService {
         final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(employer.getEmail());
 
-        if(employer.getCompanyName() == "" || employer.getPhoneNumber() == ""
-                || employer.getEmail() == "" || employer.getPassword() == ""
-                || employer.getWebAdress()== "")
-        {
-            return new ErrorResult("Tüm alanları doldurduğunuzdan emin olun.");
-        }
-
-        else if (!matcher.matches()){
+        if (!matcher.matches()){
             return new ErrorResult("Lütfen geçerli bir email adresi giriniz.");
         }
 
