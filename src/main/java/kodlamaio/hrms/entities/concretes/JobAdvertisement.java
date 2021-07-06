@@ -53,14 +53,20 @@ public class JobAdvertisement {
 
     @ManyToOne()
     @JoinColumn(name = "employer_id")
+    @NotBlank
+    @NotNull
     private Employer employer;
 
     @ManyToOne()
     @JoinColumn(name = "job_position_id")
+    @NotBlank
+    @NotNull
     private JobPosition jobPosition;
 
     @ManyToOne()
     @JoinColumn(name = "city_id")
+    @NotBlank
+    @NotNull
     private City city;
 
 }

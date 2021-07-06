@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,12 +12,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "user_id",referencedColumnName = "id") // KAZANANLAR ASLA PES ETMEYENLERDİR.
+//@PrimaryKeyJoinColumn(name="candidate_id",referencedColumnName = "id")
 @EqualsAndHashCode(callSuper = true)
 @Table(name="candidates")
 public class Candidate extends User{
@@ -42,5 +45,9 @@ public class Candidate extends User{
 
     @Column(name="is_activated")
     private boolean isActivated;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "candidate")
+    private List<Cv> cvs;
 
 }
